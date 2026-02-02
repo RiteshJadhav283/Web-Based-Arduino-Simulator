@@ -1,0 +1,520 @@
+/**
+ * ArduinoUno.css - Tinkercad/Wokwi-quality styling
+ * 
+ * Features:
+ * - Realistic 3D depth with shadows and gradients
+ * - Color-coded pins with glow effects
+ * - Smooth hover transitions
+ * - LED glow animations
+ */
+
+/* =============================================================================
+   CONTAINER
+   ============================================================================= */
+
+.arduino-uno-container {
+    display: inline-block;
+    position: relative;
+    user-select: none;
+}
+
+.arduino-uno-svg {
+    width: 480px;
+    height: 320px;
+    display: block;
+}
+
+/* =============================================================================
+   BOARD BASE - Realistic PCB
+   ============================================================================= */
+
+.board-base {
+    fill: url(#boardGradient);
+}
+
+.board-edge {
+    fill: none;
+    stroke: #1A5276;
+    stroke-width: 2;
+}
+
+.mounting-hole-outer {
+    fill: #1A5276;
+    stroke: #154360;
+    stroke-width: 1;
+}
+
+.mounting-hole-inner {
+    fill: #FDFEFE;
+    stroke: #D5DBDB;
+    stroke-width: 1;
+}
+
+/* =============================================================================
+   USB PORT - Metallic finish
+   ============================================================================= */
+
+.usb-housing {
+    fill: #78909C;
+    stroke: #546E7A;
+    stroke-width: 1;
+}
+
+.usb-metal {
+    fill: url(#usbGradient);
+    stroke: #78909C;
+    stroke-width: 1;
+}
+
+.usb-inner {
+    fill: #37474F;
+}
+
+/* =============================================================================
+   POWER JACK - 3D barrel connector
+   ============================================================================= */
+
+.power-housing {
+    fill: #263238;
+    stroke: #1a1a1a;
+    stroke-width: 1;
+}
+
+.power-barrel-outer {
+    fill: #37474F;
+    stroke: #1a1a1a;
+    stroke-width: 1;
+}
+
+.power-barrel-inner {
+    fill: #455A64;
+}
+
+.power-barrel-center {
+    fill: #263238;
+}
+
+/* =============================================================================
+   RESET BUTTON - Tactile switch
+   ============================================================================= */
+
+.reset-housing {
+    fill: #37474F;
+    stroke: #263238;
+    stroke-width: 1;
+}
+
+.reset-button-outer {
+    fill: #B71C1C;
+    stroke: #7F0000;
+    stroke-width: 1;
+}
+
+.reset-button-inner {
+    fill: #D32F2F;
+    cursor: pointer;
+    transition: fill 0.15s ease;
+}
+
+.reset-button-inner:hover {
+    fill: #E53935;
+}
+
+/* =============================================================================
+   INTEGRATED CIRCUITS
+   ============================================================================= */
+
+.ic-body {
+    fill: url(#chipGradient);
+    stroke: #0a0a0a;
+    stroke-width: 1;
+}
+
+.ic-pin {
+    fill: #B0BEC5;
+}
+
+.atmega-body {
+    fill: url(#chipGradient);
+    stroke: #0a0a0a;
+    stroke-width: 1;
+}
+
+.atmega-pin {
+    fill: #B0BEC5;
+}
+
+.atmega-notch {
+    fill: #2a2a2a;
+}
+
+.atmega-dot {
+    fill: #3a3a3a;
+}
+
+/* =============================================================================
+   LEDs - With glow effects
+   ============================================================================= */
+
+.led {
+    transition: opacity 0.3s ease;
+}
+
+.led-l {
+    fill: #FFC107;
+}
+
+.led-tx {
+    fill: #4CAF50;
+}
+
+.led-rx {
+    fill: #4CAF50;
+}
+
+.led-on {
+    fill: #4CAF50;
+}
+
+.led-label {
+    font-size: 9px;
+    fill: #FFFFFF;
+    font-family: Arial, sans-serif;
+    text-anchor: end;
+}
+
+.led-label-right {
+    font-size: 9px;
+    fill: #FFFFFF;
+    font-family: Arial, sans-serif;
+    text-anchor: end;
+}
+
+/* =============================================================================
+   PASSIVE COMPONENTS
+   ============================================================================= */
+
+.crystal {
+    fill: #CFD8DC;
+    stroke: #90A4AE;
+    stroke-width: 1;
+}
+
+.cap-electrolytic {
+    fill: #455A64;
+    stroke: #37474F;
+    stroke-width: 1;
+}
+
+.cap-top {
+    fill: #546E7A;
+}
+
+.vreg {
+    fill: #1a1a1a;
+    stroke: #0a0a0a;
+    stroke-width: 1;
+}
+
+/* =============================================================================
+   BRANDING
+   ============================================================================= */
+
+.arduino-infinity {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.arduino-text {
+    font-size: 15px;
+    font-weight: bold;
+    fill: #FFFFFF;
+    font-family: Arial, sans-serif;
+    text-anchor: middle;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.uno-text {
+    font-size: 22px;
+    font-weight: bold;
+    fill: #FFFFFF;
+    font-family: Arial, sans-serif;
+    text-anchor: middle;
+}
+
+/* =============================================================================
+   PIN HEADERS - 3D plastic housing
+   ============================================================================= */
+
+.pin-header {
+    fill: url(#headerGradient);
+    stroke: #0a0a0a;
+    stroke-width: 1;
+}
+
+.pin-header-small {
+    fill: url(#headerGradient);
+    stroke: #0a0a0a;
+    stroke-width: 1;
+}
+
+/* =============================================================================
+   LABELS
+   ============================================================================= */
+
+.header-label {
+    font-size: 9px;
+    font-weight: bold;
+    fill: #FFFFFF;
+    font-family: Arial, sans-serif;
+    text-anchor: middle;
+}
+
+.pin-label {
+    font-size: 7px;
+    fill: #AED6F1;
+    font-family: Arial, sans-serif;
+    text-anchor: middle;
+    writing-mode: vertical-rl;
+    transform-origin: center;
+}
+
+/* =============================================================================
+   INTERACTIVE PINS - The heart of interactivity
+   ============================================================================= */
+
+.pin-group {
+    transition: transform 0.15s ease;
+}
+
+.pin-group:hover {
+    transform: scale(1.15);
+}
+
+.pin-group.selected {
+    transform: scale(1.2);
+}
+
+.pin-socket {
+    fill: #1a1a1a;
+    stroke: #0a0a0a;
+    stroke-width: 1;
+}
+
+.arduino-pin {
+    fill: url(#pinMetalGradient);
+    stroke: #B8860B;
+    stroke-width: 1;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.arduino-pin.hovered {
+    stroke-width: 2;
+}
+
+.arduino-pin.selected {
+    stroke-width: 2;
+    animation: pinPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pinPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.pin-hole {
+    fill: #0a0a0a;
+    pointer-events: none;
+}
+
+/* Pin category colors */
+.arduino-pin.digital {
+    fill: url(#pinMetalGradient);
+}
+
+.arduino-pin.digital.hovered,
+.arduino-pin.digital.selected {
+    fill: #FFEB3B;
+    stroke: #FFC107;
+}
+
+.arduino-pin.analog {
+    fill: #64B5F6;
+    stroke: #1976D2;
+}
+
+.arduino-pin.analog.hovered,
+.arduino-pin.analog.selected {
+    fill: #90CAF9;
+    stroke: #1565C0;
+}
+
+.arduino-pin.power {
+    fill: #EF5350;
+    stroke: #C62828;
+}
+
+.arduino-pin.power.hovered,
+.arduino-pin.power.selected {
+    fill: #E57373;
+    stroke: #B71C1C;
+}
+
+.arduino-pin.ground {
+    fill: #616161;
+    stroke: #424242;
+}
+
+.arduino-pin.ground.hovered,
+.arduino-pin.ground.selected {
+    fill: #757575;
+    stroke: #212121;
+}
+
+.arduino-pin.reference {
+    fill: #BA68C8;
+    stroke: #7B1FA2;
+}
+
+.arduino-pin.reference.hovered,
+.arduino-pin.reference.selected {
+    fill: #CE93D8;
+    stroke: #6A1B9A;
+}
+
+.arduino-pin.control {
+    fill: #81C784;
+    stroke: #388E3C;
+}
+
+.arduino-pin.control.hovered,
+.arduino-pin.control.selected {
+    fill: #A5D6A7;
+    stroke: #2E7D32;
+}
+
+/* =============================================================================
+   TOOLTIP - Clean and informative
+   ============================================================================= */
+
+.pin-tooltip {
+    position: fixed;
+    transform: translate(-50%, -100%);
+    background: linear-gradient(180deg, #455A64 0%, #37474F 100%);
+    color: #ECEFF1;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.4),
+        0 1px 3px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    z-index: 10000;
+    pointer-events: none;
+    min-width: 90px;
+    animation: tooltipFadeIn 0.15s ease;
+}
+
+@keyframes tooltipFadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -90%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -100%);
+    }
+}
+
+.pin-tooltip::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 8px solid transparent;
+    border-top-color: #37474F;
+}
+
+.tooltip-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.tooltip-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: #FFFFFF;
+}
+
+.tooltip-badge {
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.tooltip-badge.pwm {
+    background: linear-gradient(180deg, #FFB74D 0%, #FF9800 100%);
+    color: #263238;
+}
+
+.tooltip-body {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+}
+
+.tooltip-category {
+    font-weight: 500;
+}
+
+.tooltip-voltage {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #B0BEC5;
+}
+
+/* =============================================================================
+   ACCESSIBILITY & REDUCED MOTION
+   ============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .pin-group,
+    .arduino-pin,
+    .reset-button-inner,
+    .led {
+        transition: none;
+    }
+
+    .arduino-pin.selected {
+        animation: none;
+    }
+
+    .pin-tooltip {
+        animation: none;
+    }
+}
+
+/* =============================================================================
+   FOCUS STATES FOR KEYBOARD NAVIGATION
+   ============================================================================= */
+
+.pin-group:focus-within .arduino-pin {
+    outline: 2px solid #64B5F6;
+    outline-offset: 2px;
+}

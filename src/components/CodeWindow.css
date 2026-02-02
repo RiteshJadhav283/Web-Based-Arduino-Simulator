@@ -1,0 +1,159 @@
+/* ================================================
+   CODE WINDOW - Light Theme Code Editor
+   White Theme
+   ================================================ */
+
+.code-window {
+    width: 320px;
+    height: 100vh;
+    background: var(--color-bg, #FFFFFF);
+    border-left: 1px solid var(--color-border, #E5E5E5);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Code Header */
+.code-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: var(--color-bg, #FFFFFF);
+    border-bottom: 1px solid var(--color-border, #E5E5E5);
+    flex-shrink: 0;
+}
+
+.code-header h2 {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-secondary, #666666);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Run Button - Keep green accent */
+.run-button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: var(--color-success, #10B981);
+    color: #FFFFFF;
+    border: none;
+    border-radius: var(--radius-md, 6px);
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.run-button:hover {
+    background: #059669;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.run-button:active {
+    transform: scale(0.98);
+}
+
+.play-icon {
+    font-size: 10px;
+}
+
+/* Editor Wrapper */
+.editor-wrapper {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    background: var(--color-surface, #FAFAFA);
+}
+
+/* Line Numbers - Light Theme */
+.line-numbers {
+    width: 42px;
+    padding: 14px 0;
+    background: var(--color-surface, #FAFAFA);
+    border-right: 1px solid var(--color-border, #E5E5E5);
+    overflow: hidden;
+    flex-shrink: 0;
+    user-select: none;
+}
+
+.line-number {
+    height: 21px;
+    padding-right: 10px;
+    font-family: 'SF Mono', 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 21px;
+    color: var(--color-text-muted, #999999);
+    text-align: right;
+}
+
+/* Code Editor - Light Theme */
+.code-editor {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 14px;
+    border: none;
+    outline: none;
+    resize: none;
+    font-family: 'SF Mono', 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 21px;
+    color: var(--color-text, #1A1A1A);
+    background: var(--color-surface, #FAFAFA);
+    tab-size: 4;
+    caret-color: var(--color-accent, #2196F3);
+}
+
+.code-editor::placeholder {
+    color: var(--color-text-muted, #999999);
+    font-style: italic;
+}
+
+.code-editor:focus {
+    background: #FFFFFF;
+}
+
+/* Status Bar - Subtle light theme */
+.status-bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+    padding: 6px 14px;
+    background: var(--color-surface, #FAFAFA);
+    border-top: 1px solid var(--color-border, #E5E5E5);
+    flex-shrink: 0;
+}
+
+.status-bar span {
+    font-size: 11px;
+    color: var(--color-text-muted, #999999);
+    font-weight: 500;
+}
+
+/* Scrollbar Styling */
+.code-editor::-webkit-scrollbar {
+    width: 8px;
+}
+
+.code-editor::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.code-editor::-webkit-scrollbar-thumb {
+    background: var(--color-border, #E5E5E5);
+    border-radius: 4px;
+}
+
+.code-editor::-webkit-scrollbar-thumb:hover {
+    background: var(--color-border-strong, #D0D0D0);
+}

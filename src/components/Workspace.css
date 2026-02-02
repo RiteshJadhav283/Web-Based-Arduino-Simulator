@@ -1,0 +1,178 @@
+/* ================================================
+   WORKSPACE - Circuit Design Canvas
+   White Theme
+   ================================================ */
+
+.workspace {
+    flex: 1;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-surface, #FAFAFA);
+    border-left: 1px solid var(--color-border, #E5E5E5);
+    border-right: 1px solid var(--color-border, #E5E5E5);
+}
+
+/* Workspace Header */
+.workspace-header {
+    padding: 10px 16px;
+    background: var(--color-bg, #FFFFFF);
+    border-bottom: 1px solid var(--color-border, #E5E5E5);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.workspace-header h2 {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-secondary, #666666);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.selected-pin-info {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    background: var(--color-accent, #2196F3);
+    color: white;
+    border-radius: var(--radius-sm, 4px);
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* Canvas Area */
+.workspace-canvas {
+    flex: 1;
+    padding: 12px;
+    overflow: auto;
+}
+
+/* Grid Background - Clean white workbench */
+.grid-background {
+    width: 100%;
+    height: 100%;
+    min-height: 600px;
+    background-color: #FFFFFF;
+    /* Ultra-subtle grid */
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+    border: 1px solid var(--color-border, #E5E5E5);
+    border-radius: var(--radius-lg, 8px);
+    box-shadow: var(--shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.04));
+    position: relative;
+}
+
+/* Shared Konva Stage - fills the workspace, no visible box */
+.grid-background .konvajs-content {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.grid-background canvas {
+    background: transparent !important;
+}
+
+/* Placeholder Text */
+.placeholder-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--color-text-muted, #999999);
+    font-size: 14px;
+    font-style: italic;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Workspace Component - No visible box, just positioning */
+.workspace-component {
+    position: absolute;
+    cursor: grab;
+    background: transparent;
+    pointer-events: auto;
+}
+
+.workspace-component:active {
+    cursor: grabbing;
+}
+
+/* Make Konva canvas transparent */
+.workspace-component canvas {
+    background: transparent !important;
+}
+
+/* Delete Button */
+.delete-btn {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--color-danger, #EF4444);
+    color: white;
+    border: 2px solid white;
+    font-size: 9px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.15s ease;
+    z-index: 10;
+    box-shadow: var(--shadow-md, 0 2px 8px rgba(0, 0, 0, 0.06));
+}
+
+.workspace-component:hover .delete-btn {
+    opacity: 1;
+}
+
+.delete-btn:hover {
+    background: #DC2626;
+    transform: scale(1.1);
+}
+
+/* Unknown Component */
+.unknown-component {
+    width: 50px;
+    height: 50px;
+    background: var(--color-surface, #FAFAFA);
+    border: 2px dashed var(--color-border, #E5E5E5);
+    border-radius: var(--radius-md, 6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: var(--color-text-muted, #999999);
+}
+
+/* Scrollbar Styling */
+.workspace-canvas::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.workspace-canvas::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.workspace-canvas::-webkit-scrollbar-thumb {
+    background: var(--color-border, #E5E5E5);
+    border-radius: 4px;
+}
+
+.workspace-canvas::-webkit-scrollbar-thumb:hover {
+    background: var(--color-border-strong, #D0D0D0);
+}

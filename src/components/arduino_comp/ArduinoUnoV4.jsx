@@ -45,7 +45,6 @@ const H = 270;  // Height
 
 
 // Digital pins - Left section (AREF to ~9) and Right section (8 to RX←0)
-// Based on exact Tinkercad reference layout
 const DIGITAL_PINS_LEFT = [
     { id: 'AREF', x: 5 },
     { id: 'GND', x: 18 },
@@ -269,7 +268,7 @@ const ArduinoUnoV4 = forwardRef(function ArduinoUnoV4({
                 {[0, 1, 2].map(i => <Rect key={`b${i}`} x={5 + i * 7} y={10} width={5} height={5} fill={C.hole} cornerRadius={1} />)}
             </Group>
 
-            {/* ===== DIGITAL HEADER - Matching Tinkercad Reference Exactly ===== */}
+            {/* ===== DIGITAL HEADER ===== */}
             <Group y={5}>
                 {/* Left Header Strip (AREF to ~9) - 7 pins */}
                 <Group x={80}>

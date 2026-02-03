@@ -86,19 +86,7 @@ function App() {
   });
   const [generatedCode, setGeneratedCode] = useState('');
 
-  const [code, setCode] = useState(`// Blink an LED on pin 13
-const int ledPin = 13;
-
-void setup() {
-  pinMode(ledPin, OUTPUT);
-}
-
-void loop() {
-  digitalWrite(ledPin, HIGH);
-  delay(1000);            // wait for a second
-  digitalWrite(ledPin, LOW);
-  delay(1000);            // wait for a second
-}`);
+  const [code, setCode] = useState('');
 
   // Simple circuit tracing (Arduino Digital Pins -> Components)
   // pinStates: { [digitalPinNumber: number]: 0 | 1 }

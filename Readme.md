@@ -190,23 +190,6 @@ src/
 5. **Simulation**: AVR8js runs the compiled hex file
 6. **Visual Feedback**: Pin states are read and reflected in component visuals (LED on/off)
 
-## 🛠️ Build & Deploy
-
-### Production Build
-```bash
-npm run build
-```
-
-### Preview Production Build
-```bash
-npm run preview
-```
-
-### Lint Code
-```bash
-npm run lint
-```
-
 ## 👨‍💻 Author
 
 **Ritesh Jadhav**

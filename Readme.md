@@ -190,13 +190,6 @@ src/
 5. **Simulation**: AVR8js runs the compiled hex file
 6. **Visual Feedback**: Pin states are read and reflected in component visuals (LED on/off)
 
-## 📋 Requirements Compliance
-
-✅ **Task 1**: Visual interface with component palette and canvas  
-✅ **Task 2**: Auto-wiring with configurable pins (D2-D13)  
-✅ **Task 3**: Auto code generation with pinMode, digitalWrite, digitalRead  
-✅ **End-to-End Flow**: Complete workflow from design to simulation
-
 ## 🛠️ Build & Deploy
 
 ### Production Build
@@ -213,10 +206,6 @@ npm run preview
 ```bash
 npm run lint
 ```
-
-## 📝 License
-
-This project is open source and available under the [MIT License](LICENSE).
 
 ## 👨‍💻 Author
 

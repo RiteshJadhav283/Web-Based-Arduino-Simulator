@@ -1,23 +1,7 @@
-import { useState, useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import './CodeWindow.css';
 
-function CodeWindow() {
-    const [code, setCode] = useState(`const int ledPin = 10;
-const int buttonPin = 2;
-
-void setup () {
-    pinMode(ledPin, OUTPUT);
-    pinMode(buttnPin, INPUT);
-}
-
-void loop() {
-    if (digitalRead(buttnPin) == HIGH) {
-        digitalWrite(ledPin, HIGH);
-    }
-    else {
-        digitalWrite(ledPin, LOW);
-    }
-}`);
+function CodeWindow({ code, onChange, isExperimentMode = false, readOnly = false }) {
 
     const textareaRef = useRef(null);
     const lineNumbersRef = useRef(null);
@@ -35,19 +19,15 @@ void loop() {
         return lines.map((_, index) => index + 1);
     };
 
-    const handleRunCode = () => {
-        console.log('Running code:', code);
-        alert('Code execution started!');
-    };
-
-    // Handle Tab key for indentation
+    // Handle Tab key for indentation (only when editable)
     const handleKeyDown = (e) => {
+        if (readOnly) return;
         if (e.key === 'Tab') {
             e.preventDefault();
             const start = e.target.selectionStart;
             const end = e.target.selectionEnd;
             const newCode = code.substring(0, start) + '    ' + code.substring(end);
-            setCode(newCode);
+            onChange?.(newCode);
             // Move cursor after the tab
             setTimeout(() => {
                 e.target.selectionStart = e.target.selectionEnd = start + 4;
@@ -59,11 +39,29 @@ void loop() {
         <div className="code-window">
             {/* Header with Run Button */}
             <div className="code-header">
-                <h2>Code</h2>
-                <button className="run-button" onClick={handleRunCode}>
-                    <span className="play-icon">▶</span>
-                    Run Code
-                </button>
+                <h2>{isExperimentMode ? 'Auto-Generated Code' : 'Code'}</h2>
+                {!isExperimentMode && (
+                    <div className="code-header-actions">
+                        <button
+                            className="example-button"
+                            onClick={() => onChange?.(`// Blink an LED on pin 13
+const int ledPin = 13;
+
+void setup() {
+  pinMode(ledPin, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(ledPin, HIGH);
+  delay(1000);            // wait for a second
+  digitalWrite(ledPin, LOW);
+  delay(1000);            // wait for a second
+}`)}
+                        >
+                            Blink Example
+                        </button>
+                    </div>
+                )}
             </div>
 
             {/* Code Editor Area with Line Numbers */}
@@ -77,11 +75,16 @@ void loop() {
                     ref={textareaRef}
                     className="code-editor"
                     value={code}
-                    onChange={(e) => setCode(e.target.value)}
+                    onChange={(e) => {
+                        if (!readOnly) {
+                            onChange?.(e.target.value);
+                        }
+                    }}
                     onScroll={handleScroll}
                     onKeyDown={handleKeyDown}
                     spellCheck={false}
                     placeholder="Write your Arduino code here..."
+                    readOnly={readOnly}
                 />
             </div>
 

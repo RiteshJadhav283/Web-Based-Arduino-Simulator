@@ -71,10 +71,12 @@ const LED = forwardRef(function LED({
     onPinClick,
     onPinHover,
     onSelect,
+    isOn: externalIsOn = null,
     draggable = true,
     onDragEnd,
 }, ref) {
-    const [isOn, setIsOn] = useState(initialState);
+    const [internalIsOn, setInternalIsOn] = useState(initialState);
+    const isOn = externalIsOn !== null ? externalIsOn : internalIsOn;
     const [hoveredPin, setHoveredPin] = useState(null);
 
     const colors = LED_COLORS[color] || LED_COLORS.red;

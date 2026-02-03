@@ -76,8 +76,8 @@ const POWER_PINS = [
     { id: 'RESET', x: 143 },
     { id: '3.3V', x: 156 },
     { id: '5V', x: 169 },
-    { id: 'GND', x: 182 },
-    { id: 'GND', x: 195 },
+    { id: 'GND1', x: 182 }, // First GND
+    { id: 'GND2', x: 195 }, // Second GND
     { id: 'Vin', x: 208 },
 ];
 
@@ -351,8 +351,15 @@ const ArduinoUnoV4 = forwardRef(function ArduinoUnoV4({
 
                 {/* Power pin labels - rotated 90° reading bottom-to-top */}
                 {POWER_PINS.map((pin, i) => (
-                    <Text key={`plbl${i}`} x={pin.x + 3} y={-19} text={pin.id}
-                        fontSize={7} fill={C.label} rotation={90} />
+                    <Text
+                        key={`plbl${i}`}
+                        x={pin.x + 3}
+                        y={-19}
+                        text={pin.id.startsWith('GND') ? 'GND' : pin.id}
+                        fontSize={7}
+                        fill={C.label}
+                        rotation={90}
+                    />
                 ))}
             </Group>
 

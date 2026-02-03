@@ -10,3 +10,59 @@
     overflow: hidden;
     background: var(--color-bg, #FFFFFF);
 }
+
+/* Main panel to the right of the items sidebar */
+.main-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.top-toolbar {
+    padding: 10px 16px;
+    background: var(--color-bg, #FFFFFF);
+    border-bottom: 1px solid var(--color-border, #E5E5E5);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+}
+
+.experiment-btn {
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--color-border, #E5E5E5);
+    background: var(--color-surface, #FAFAFA);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.experiment-btn.active {
+    border-color: var(--color-accent, #2196F3);
+    color: var(--color-accent, #2196F3);
+}
+
+.experiment-exit-btn {
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--color-border, #E5E5E5);
+    background: var(--color-surface, #FAFAFA);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.experiment-hint {
+    font-size: 11px;
+    color: var(--color-text-secondary, #666666);
+}
+
+.workspace-and-code {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    height: calc(100vh - 52px);
+}

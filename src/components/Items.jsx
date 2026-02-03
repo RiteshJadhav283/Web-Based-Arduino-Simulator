@@ -22,12 +22,6 @@ function Items() {
             ]
         },
         {
-            name: 'Output',
-            components: [
-                { id: 'buzzer', name: 'Buzzer', element: 'wokwi-buzzer', scale: 0.5 },
-            ]
-        },
-        {
             name: 'Boards',
             components: [
                 { id: 'arduino-uno-v4', name: 'Arduino Uno', element: 'arduino-uno-v4', scale: 0.18 },
@@ -123,8 +117,6 @@ function Items() {
                 );
             case 'wokwi-pushbutton':
                 return <wokwi-pushbutton color="green" style={style} />;
-            case 'wokwi-buzzer':
-                return <wokwi-buzzer style={style} />;
             case 'resistor':
                 return (
                     <svg width="30" height="70" viewBox="0 0 50 120" style={style}>

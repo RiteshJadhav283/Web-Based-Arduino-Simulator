@@ -62,7 +62,25 @@ const PIN_OFFSETS = {
     },
 };
 
-function Workspace({ components = [], onDrop, onComponentMove, onComponentDelete }) {
+function Workspace({
+    components = [],
+    wires = [],
+    setWires,
+    simState = {},
+    onDrop,
+    onComponentMove,
+    onComponentDelete,
+    onButtonPress,
+    onButtonRelease,
+    onRun,
+    onStop,
+    isRunning,
+    viewMode = 'both',
+    onViewModeChange,
+    experimentActive = false,
+    pinConfig,
+    onPinConfigChange,
+}) {
     const canvasRef = useRef(null);
     const stageRef = useRef(null);
     const [selectedComponent, setSelectedComponent] = useState(null);
@@ -70,7 +88,7 @@ function Workspace({ components = [], onDrop, onComponentMove, onComponentDelete
 
     // Wire state - wires now store pin references + bend points
     // Wire structure: { id, startPin: {pin, componentId}, endPin: {pin, componentId}, bendPoints: [{x,y}], color }
-    const [wires, setWires] = useState([]);
+    // const [wires, setWires] = useState([]); // Moved to App parent
     const [selectedWire, setSelectedWire] = useState(null);
     const [wiringMode, setWiringMode] = useState(null);
     // wiringMode = { startPin, startComponentId, bendPoints: [{x, y}] }
@@ -346,6 +364,7 @@ function Workspace({ components = [], onDrop, onComponentMove, onComponentDelete
                                 scale={1}
                                 color="red"
                                 isSelected={selectedComponent === comp.id}
+                                isOn={simState[comp.id]?.isOn}
                                 onSelect={handleSelect}
                                 onPinClick={(pin) => handlePinClick(pin, comp.id)}
                                 onPinHover={(pin) => { }}
@@ -362,6 +381,7 @@ function Workspace({ components = [], onDrop, onComponentMove, onComponentDelete
                                 scale={1}
                                 color="green"
                                 isSelected={selectedComponent === comp.id}
+                                isOn={simState[comp.id]?.isOn}
                                 onSelect={handleSelect}
                                 onPinClick={(pin) => handlePinClick(pin, comp.id)}
                                 onPinHover={(pin) => { }}
@@ -378,6 +398,7 @@ function Workspace({ components = [], onDrop, onComponentMove, onComponentDelete
                                 scale={1}
                                 color="yellow"
                                 isSelected={selectedComponent === comp.id}
+                                isOn={simState[comp.id]?.isOn}
                                 onSelect={handleSelect}
                                 onPinClick={(pin) => handlePinClick(pin, comp.id)}
                                 onPinHover={(pin) => { }}
@@ -395,6 +416,8 @@ function Workspace({ components = [], onDrop, onComponentMove, onComponentDelete
                                 color="red"
                                 isSelected={selectedComponent === comp.id}
                                 onSelect={handleSelect}
+                                onPress={() => onButtonPress?.(comp.id)}
+                                onRelease={() => onButtonRelease?.(comp.id)}
                                 onPinClick={(pin) => handlePinClick(pin, comp.id)}
                                 onPinHover={(pin) => { }}
                                 draggable={!wiringMode}
@@ -456,6 +479,94 @@ function Workspace({ components = [], onDrop, onComponentMove, onComponentDelete
             {/* Header */}
             <div className="workspace-header">
                 <h2>Circuit Workspace</h2>
+                <div className="workspace-header-controls">
+                    {experimentActive && pinConfig && (
+                        <div className="pin-config-panel">
+                            <div className="pin-config-field">
+                                <label>LED Pin</label>
+                                <select
+                                    value={pinConfig.ledPin}
+                                    onChange={(e) =>
+                                        onPinConfigChange?.({ ledPin: Number(e.target.value) })
+                                    }
+                                >
+                                    {Array.from({ length: 12 }, (_, i) => i + 2)
+                                        .filter((p) => p !== pinConfig.buttonPin)
+                                        .map((p) => (
+                                            <option key={p} value={p}>
+                                                D{p}
+                                            </option>
+                                        ))}
+                                </select>
+                            </div>
+                            <div className="pin-config-field">
+                                <label>Button Pin</label>
+                                <select
+                                    value={pinConfig.buttonPin}
+                                    onChange={(e) =>
+                                        onPinConfigChange?.({ buttonPin: Number(e.target.value) })
+                                    }
+                                >
+                                    {Array.from({ length: 12 }, (_, i) => i + 2)
+                                        .filter((p) => p !== pinConfig.ledPin)
+                                        .map((p) => (
+                                            <option key={p} value={p}>
+                                                D{p}
+                                            </option>
+                                        ))}
+                                </select>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* View toggle: Circuit | Code | Both */}
+                    <div className="view-toggle-group">
+                        <button
+                            className={viewMode === 'circuit' ? 'active' : ''}
+                            onClick={() => onViewModeChange?.('circuit')}
+                        >
+                            Circuit
+                        </button>
+                        <button
+                            className={viewMode === 'code' ? 'active' : ''}
+                            onClick={() => onViewModeChange?.('code')}
+                        >
+                            Code
+                        </button>
+                        <button
+                            className={viewMode === 'both' ? 'active' : ''}
+                            onClick={() => onViewModeChange?.('both')}
+                        >
+                            Both
+                        </button>
+                    </div>
+
+                    {/* Simulation controls */}
+                    <div className="sim-controls">
+                        {isRunning ? (
+                            <button className="stop-button" onClick={onStop}>
+                                ■ Stop
+                            </button>
+                        ) : (
+                            <button className="run-button" onClick={onRun}>
+                                ▶ Start
+                            </button>
+                        )}
+                    </div>
+
+                    {/* Wire color selector */}
+                    <div className="wire-color-selector">
+                        <label>Wire: </label>
+                        <select value={wireColor} onChange={(e) => setWireColor(e.target.value)}>
+                            <option value="red">Red</option>
+                            <option value="green">Green</option>
+                            <option value="blue">Blue</option>
+                            <option value="yellow">Yellow</option>
+                            <option value="orange">Orange</option>
+                            <option value="black">Black</option>
+                        </select>
+                    </div>
+                </div>
                 {wiringMode && (
                     <span className="wiring-info">
                         Drawing wire from {wiringMode.startPin} | Click pin to connect, canvas to bend, ESC to cancel
@@ -466,18 +577,6 @@ function Workspace({ components = [], onDrop, onComponentMove, onComponentDelete
                         Wire selected | Press Delete to remove
                     </span>
                 )}
-                {/* Wire color selector */}
-                <div className="wire-color-selector">
-                    <label>Wire: </label>
-                    <select value={wireColor} onChange={(e) => setWireColor(e.target.value)}>
-                        <option value="red">Red</option>
-                        <option value="green">Green</option>
-                        <option value="blue">Blue</option>
-                        <option value="yellow">Yellow</option>
-                        <option value="orange">Orange</option>
-                        <option value="black">Black</option>
-                    </select>
-                </div>
             </div>
 
             {/* Canvas Area */}

@@ -9,37 +9,28 @@ function Items() {
         {
             name: 'General',
             components: [
-                { id: 'resistor', name: 'Resistor', element: 'wokwi-resistor', scale: 0.8 },
-                { id: 'capacitor', name: 'Capacitor', element: 'wokwi-buzzer', scale: 0.5 },
-                { id: 'potentiometer', name: 'Potentiometer', element: 'wokwi-potentiometer', scale: 0.4 },
-                { id: 'led-red', name: 'LED Red', element: 'wokwi-led', props: { color: 'red' }, scale: 1.2 },
-                { id: 'led-green', name: 'LED Green', element: 'wokwi-led', props: { color: 'green' }, scale: 1.2 },
-                { id: 'led-yellow', name: 'LED Yellow', element: 'wokwi-led', props: { color: 'yellow' }, scale: 1.2 },
+                { id: 'resistor', name: 'Resistor', element: 'resistor', scale: 0.7 },
+                { id: 'led-red', name: 'LED Red', element: 'led-red', props: { color: 'red' }, scale: 1.2 },
+                { id: 'led-green', name: 'LED Green', element: 'led-green', props: { color: 'green' }, scale: 1.2 },
+                { id: 'led-yellow', name: 'LED Yellow', element: 'led-yellow', props: { color: 'yellow' }, scale: 1.2 },
             ]
         },
         {
             name: 'Input',
             components: [
-                { id: 'pushbutton', name: 'Pushbutton', element: 'wokwi-pushbutton', scale: 0.6 },
-                { id: 'potentiometer2', name: 'Potentiometer', element: 'wokwi-potentiometer', scale: 0.4 },
-                { id: 'slideswitch', name: 'Slideswitch', element: 'wokwi-pushbutton', scale: 0.6 },
+                { id: 'pushbutton', name: 'Pushbutton', element: 'pushbutton', scale: 0.6 },
             ]
         },
         {
             name: 'Output',
             components: [
                 { id: 'buzzer', name: 'Buzzer', element: 'wokwi-buzzer', scale: 0.5 },
-                { id: 'servo', name: 'Servo', element: 'wokwi-servo', scale: 0.35 },
-                { id: 'lcd1602', name: 'LCD 16x2', element: 'wokwi-lcd1602', scale: 0.1 },
             ]
         },
         {
             name: 'Boards',
             components: [
-                { id: 'arduino-uno', name: 'Arduino Uno', element: 'arduino-uno', scale: 0.12 },
-                { id: 'arduino-uno-v2', name: 'Arduino Uno V2', element: 'arduino-uno-v2', scale: 0.2 },
-                { id: 'arduino-uno-v3', name: 'Arduino Uno V3', element: 'arduino-uno-v3', scale: 0.2 },
-                { id: 'arduino-uno-v4', name: 'Arduino Uno V4', element: 'arduino-uno-v4', scale: 0.18 },
+                { id: 'arduino-uno-v4', name: 'Arduino Uno', element: 'arduino-uno-v4', scale: 0.18 },
             ]
         },
     ];
@@ -67,38 +58,6 @@ function Items() {
         };
 
         switch (component.element) {
-            case 'arduino-uno':
-                return (
-                    <div style={{ ...style, fontSize: '10px', color: '#1565C0', fontWeight: 'bold', textAlign: 'center' }}>
-                        <svg width="60" height="40" viewBox="0 0 60 40" style={style}>
-                            <rect x="2" y="2" width="56" height="36" rx="3" fill="#1565C0" stroke="#0D47A1" strokeWidth="1" />
-                            <rect x="0" y="12" width="6" height="16" rx="1" fill="#90A4AE" />
-                            <text x="30" y="24" fill="#BBDEFB" fontSize="8" textAnchor="middle" fontWeight="bold">UNO</text>
-                        </svg>
-                    </div>
-                );
-            case 'arduino-uno-v2':
-                return (
-                    <svg width="56" height="36" viewBox="0 0 280 180" style={style}>
-                        <rect x="0" y="0" width="280" height="180" rx="8" fill="#00979D" />
-                        <circle cx="14" cy="14" r="5" fill="none" stroke="#007A7F" strokeWidth="2" />
-                        <circle cx="266" cy="14" r="5" fill="none" stroke="#007A7F" strokeWidth="2" />
-                        <circle cx="14" cy="166" r="5" fill="none" stroke="#007A7F" strokeWidth="2" />
-                        <circle cx="266" cy="166" r="5" fill="none" stroke="#007A7F" strokeWidth="2" />
-                        <text x="140" y="100" fill="#B2DFDB" fontSize="40" textAnchor="middle" fontWeight="bold">V2</text>
-                    </svg>
-                );
-            case 'arduino-uno-v3':
-                return (
-                    <svg width="56" height="36" viewBox="0 0 280 180" style={style}>
-                        <rect x="0" y="0" width="280" height="180" rx="8" fill="#00979D" />
-                        <circle cx="14" cy="14" r="5" fill="none" stroke="#007A7F" strokeWidth="2" />
-                        <circle cx="266" cy="14" r="5" fill="none" stroke="#007A7F" strokeWidth="2" />
-                        <circle cx="14" cy="166" r="5" fill="none" stroke="#007A7F" strokeWidth="2" />
-                        <circle cx="266" cy="166" r="5" fill="none" stroke="#007A7F" strokeWidth="2" />
-                        <text x="140" y="100" fill="#B2DFDB" fontSize="40" textAnchor="middle" fontWeight="bold">V3</text>
-                    </svg>
-                );
             case 'arduino-uno-v4':
                 return (
                     <svg width="56" height="45" viewBox="0 0 320 260" style={style}>
@@ -108,17 +67,84 @@ function Items() {
                         <circle cx="15" cy="248" r="5" fill="#F5F5DC" />
                         <circle cx="305" cy="200" r="5" fill="#F5F5DC" />
                         <rect x="125" y="130" width="155" height="38" fill="#2a2a2a" rx="2" />
-                        <text x="160" y="95" fill="#B8D4E8" fontSize="28" fontWeight="bold">V4</text>
+                        <text x="160" y="95" fill="#B8D4E8" fontSize="28" fontWeight="bold">UNO</text>
                     </svg>
                 );
-            case 'wokwi-arduino-uno':
-                return <wokwi-arduino-uno style={style} />;
+            case 'led-red':
+                return (
+                    <svg width="30" height="50" viewBox="0 0 40 80" style={style}>
+                        <ellipse cx="20" cy="22" rx="14" ry="18" fill="#FF4444" />
+                        <ellipse cx="14" cy="14" rx="5" ry="6" fill="rgba(255,255,255,0.3)" />
+                        <rect x="8" y="38" width="24" height="10" fill="#555" rx="2" />
+                        <rect x="12" y="48" width="3" height="20" fill="#AAA" />
+                        <rect x="25" y="48" width="3" height="16" fill="#AAA" />
+                    </svg>
+                );
+            case 'led-green':
+                return (
+                    <svg width="30" height="50" viewBox="0 0 40 80" style={style}>
+                        <ellipse cx="20" cy="22" rx="14" ry="18" fill="#44FF44" />
+                        <ellipse cx="14" cy="14" rx="5" ry="6" fill="rgba(255,255,255,0.3)" />
+                        <rect x="8" y="38" width="24" height="10" fill="#555" rx="2" />
+                        <rect x="12" y="48" width="3" height="20" fill="#AAA" />
+                        <rect x="25" y="48" width="3" height="16" fill="#AAA" />
+                    </svg>
+                );
+            case 'led-yellow':
+                return (
+                    <svg width="30" height="50" viewBox="0 0 40 80" style={style}>
+                        <ellipse cx="20" cy="22" rx="14" ry="18" fill="#FFFF44" />
+                        <ellipse cx="14" cy="14" rx="5" ry="6" fill="rgba(255,255,255,0.3)" />
+                        <rect x="8" y="38" width="24" height="10" fill="#555" rx="2" />
+                        <rect x="12" y="48" width="3" height="20" fill="#AAA" />
+                        <rect x="25" y="48" width="3" height="16" fill="#AAA" />
+                    </svg>
+                );
             case 'wokwi-led':
                 return <wokwi-led color={props.color} value="1" style={style} />;
+            case 'pushbutton':
+                return (
+                    <svg width="40" height="70" viewBox="0 0 70 120" style={style}>
+                        {/* Top pins (1b, 2b) */}
+                        <rect x="17" y="0" width="6" height="30" fill="#AAA" />
+                        <rect x="47" y="0" width="6" height="30" fill="#AAA" />
+                        {/* Button housing */}
+                        <rect x="5" y="30" width="60" height="60" fill="#1C1C1C" rx="4" />
+                        {/* Button ring */}
+                        <circle cx="35" cy="60" r="22" fill="#992222" />
+                        {/* Button cap */}
+                        <circle cx="35" cy="60" r="17" fill="#CC3333" />
+                        {/* Highlight */}
+                        <circle cx="30" cy="54" r="6" fill="rgba(255,255,255,0.3)" />
+                        {/* Bottom pins (1a, 2a) */}
+                        <rect x="17" y="90" width="6" height="30" fill="#AAA" />
+                        <rect x="47" y="90" width="6" height="30" fill="#AAA" />
+                    </svg>
+                );
             case 'wokwi-pushbutton':
                 return <wokwi-pushbutton color="green" style={style} />;
             case 'wokwi-buzzer':
                 return <wokwi-buzzer style={style} />;
+            case 'resistor':
+                return (
+                    <svg width="30" height="70" viewBox="0 0 50 120" style={style}>
+                        {/* Top lead */}
+                        <line x1="25" y1="5" x2="25" y2="30" stroke="#AAA" strokeWidth="3" />
+                        {/* Bottom lead */}
+                        <line x1="25" y1="90" x2="25" y2="115" stroke="#AAA" strokeWidth="3" />
+                        {/* Resistor body */}
+                        <rect x="15" y="30" width="20" height="60" fill="#D4B896" stroke="#8B7355" strokeWidth="1" rx="3" />
+                        {/* End caps */}
+                        <rect x="15" y="30" width="20" height="5" fill="#A08060" rx="2" />
+                        <rect x="15" y="85" width="20" height="5" fill="#A08060" rx="2" />
+                        {/* Color bands (horizontal stripes) */}
+                        <rect x="17" y="38" width="16" height="6" fill="#8B4513" />
+                        <rect x="17" y="48" width="16" height="6" fill="#000000" />
+                        <rect x="17" y="58" width="16" height="6" fill="#000000" />
+                        <rect x="17" y="68" width="16" height="6" fill="#FF0000" />
+                        <rect x="17" y="78" width="16" height="4" fill="#FFD700" />
+                    </svg>
+                );
             case 'wokwi-resistor':
                 return <wokwi-resistor value="1000" style={style} />;
             case 'wokwi-potentiometer':

@@ -176,3 +176,48 @@
 .workspace-canvas::-webkit-scrollbar-thumb:hover {
     background: var(--color-border-strong, #D0D0D0);
 }
+
+/* Wiring Info Messages */
+.wiring-info {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    background: #FF9800;
+    color: white;
+    border-radius: var(--radius-sm, 4px);
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.wire-selected-info {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    background: #FFD700;
+    color: #333;
+    border-radius: var(--radius-sm, 4px);
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* Wire Color Selector */
+.wire-color-selector {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: auto;
+}
+
+.wire-color-selector label {
+    font-size: 11px;
+    color: var(--color-text-secondary, #666666);
+}
+
+.wire-color-selector select {
+    padding: 4px 8px;
+    border: 1px solid var(--color-border, #E5E5E5);
+    border-radius: var(--radius-sm, 4px);
+    background: white;
+    font-size: 11px;
+    cursor: pointer;
+}

@@ -95,9 +95,11 @@ const ArduinoUnoV4 = forwardRef(function ArduinoUnoV4({
     x = 0,
     y = 0,
     scale = 1,
+    isSelected = false,
     onPinClick,
     onPinHover,
     onReset,
+    onSelect,
     draggable = true,
     onDragEnd,
 }, ref) {
@@ -128,7 +130,22 @@ const ArduinoUnoV4 = forwardRef(function ArduinoUnoV4({
             scaleY={scale}
             draggable={draggable}
             onDragEnd={onDragEnd}
+            onClick={onSelect}
         >
+            {/* Selection highlight */}
+            {isSelected && (
+                <Rect
+                    x={-5}
+                    y={-5}
+                    width={W + 10}
+                    height={H + 10}
+                    stroke="#FFD700"
+                    strokeWidth={3}
+                    dash={[10, 5]}
+                    cornerRadius={10}
+                    listening={false}
+                />
+            )}
 
             {/* ===== PCB BOARD ===== */}
             <Rect
@@ -334,7 +351,7 @@ const ArduinoUnoV4 = forwardRef(function ArduinoUnoV4({
 
                 {/* Power pin labels - rotated 90° reading bottom-to-top */}
                 {POWER_PINS.map((pin, i) => (
-                    <Text key={`plbl${i}`} x={pin.x +3} y={-19} text={pin.id}
+                    <Text key={`plbl${i}`} x={pin.x + 3} y={-19} text={pin.id}
                         fontSize={7} fill={C.label} rotation={90} />
                 ))}
             </Group>
@@ -359,7 +376,7 @@ const ArduinoUnoV4 = forwardRef(function ArduinoUnoV4({
 
                 {/* Analog pin labels - rotated 90° reading bottom-to-top */}
                 {ANALOG_PINS.map((pin, i) => (
-                    <Text key={`albl${i}`} x={pin.x +3} y={-15} text={pin.id}
+                    <Text key={`albl${i}`} x={pin.x + 3} y={-15} text={pin.id}
                         fontSize={8} fill={C.label} rotation={90} />
                 ))}
             </Group>

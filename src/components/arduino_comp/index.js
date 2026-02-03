@@ -7,7 +7,7 @@
  */
 
 // Main component
-export { default as ArduinoUno } from './ArduinoUno';
+export { default as ArduinoUnoV4 } from './ArduinoUnoV4';
 
 // Pin configuration and metadata
-export { PINS, PinCategory, PinDirection } from './ArduinoUno';
+export { DIGITAL_PINS, POWER_PINS, ANALOG_PINS, BOARD_DIMENSIONS } from './ArduinoUnoV4';

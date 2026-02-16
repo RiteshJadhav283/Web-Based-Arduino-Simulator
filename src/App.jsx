@@ -88,11 +88,32 @@ function App() {
 
   const [code, setCode] = useState('');
 
+  // Refs for real-time access during simulation loop
+  const wiresRef = useRef(wires);
+  const componentsRef = useRef(workspaceComponents);
+  const pinConfigRef = useRef(pinConfig);
+
+  useEffect(() => {
+    wiresRef.current = wires;
+  }, [wires]);
+
+  useEffect(() => {
+    componentsRef.current = workspaceComponents;
+  }, [workspaceComponents]);
+
+  useEffect(() => {
+    pinConfigRef.current = pinConfig;
+  }, [pinConfig]);
+
   // Simple circuit tracing (Arduino Digital Pins -> Components)
   // pinStates: { [digitalPinNumber: number]: 0 | 1 }
   const updateCircuit = (pinStates) => {
     // 1. Find the Arduino component
-    const arduino = workspaceComponents.find(c => c.element === 'arduino-uno-v4');
+    // Use refs to get latest state during simulation loop
+    const currentComponents = componentsRef.current;
+    const currentWires = wiresRef.current;
+
+    const arduino = currentComponents.find(c => c.element === 'arduino-uno-v4');
     if (!arduino) return;
 
     // Helper to find connected components recursively
@@ -102,7 +123,7 @@ function App() {
       if (visited.has(visitedKey)) return [];
       visited.add(visitedKey);
 
-      wires.forEach(wire => {
+      currentWires.forEach(wire => {
         let nextPin = null;
         let nextCompId = null;
 
@@ -118,7 +139,7 @@ function App() {
           connected.push({ compId: nextCompId, pin: nextPin });
 
           // If resistor, traverse through
-          const comp = workspaceComponents.find(c => c.id === nextCompId);
+          const comp = currentComponents.find(c => c.id === nextCompId);
           if (comp && comp.element === 'resistor') {
             const otherPin = nextPin === 'lead1' ? 'lead2' : 'lead1';
             connected.push(...findConnectedComponents(otherPin, nextCompId, visited));
@@ -130,7 +151,7 @@ function App() {
 
     // Start with all LEDs off; we'll turn specific ones on based on pin states
     const newSimState = {};
-    workspaceComponents.forEach(comp => {
+    currentComponents.forEach(comp => {
       if (comp.element && comp.element.startsWith('led-')) {
         newSimState[comp.id] = { isOn: false };
       }
@@ -145,7 +166,7 @@ function App() {
       // console.log('[DEBUG] Pin', pinNumber, '(', headerId, ') State:', pinState, 'Targets:', targets);
 
       targets.forEach(target => {
-        const comp = workspaceComponents.find(c => c.id === target.compId);
+        const comp = currentComponents.find(c => c.id === target.compId);
         if (comp && comp.element && comp.element.startsWith('led-')) {
           newSimState[target.compId] = { isOn: pinState === 1 };
         }
@@ -407,7 +428,7 @@ function App() {
       const runner = new AVRRunner(hex); // Use compiled hex from Wokwi
       runnerRef.current = runner;
       // Default: button released -> HIGH when using INPUT_PULLUP
-      const buttonPin = experimentActive ? pinConfig.buttonPin : 2;
+      const buttonPin = experimentActive ? pinConfigRef.current.buttonPin : 2;
       runner.setDigitalInput(buttonPin, 1);
       setIsRunning(true);
 
@@ -432,7 +453,7 @@ function App() {
   const handleButtonPress = () => {
     setButtonPressed(true);
     if (runnerRef.current) {
-      const buttonPin = experimentActive ? pinConfig.buttonPin : 2;
+      const buttonPin = experimentActive ? pinConfigRef.current.buttonPin : 2;
       runnerRef.current.setDigitalInput(buttonPin, 0); // pressed -> LOW
     }
   };
@@ -440,7 +461,7 @@ function App() {
   const handleButtonRelease = () => {
     setButtonPressed(false);
     if (runnerRef.current) {
-      const buttonPin = experimentActive ? pinConfig.buttonPin : 2;
+      const buttonPin = experimentActive ? pinConfigRef.current.buttonPin : 2;
       runnerRef.current.setDigitalInput(buttonPin, 1); // released -> HIGH
     }
   };
